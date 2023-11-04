@@ -22,13 +22,13 @@ class LoanCalculator extends StatefulWidget {
 
 class _LoanCalculatorState extends State<LoanCalculator> {
   TextEditingController loanAmountController = TextEditingController();
-  TextEditingController termController = TextEditingController();
+  TextEditingController timeController = TextEditingController();
   TextEditingController interestController = TextEditingController();
   double monthlyPayment = 0.0;
 
   void calculateLoan() {
     double p0 = double.parse(loanAmountController.text);
-    int time = int.parse(termController.text);
+    int time = int.parse(timeController.text);
     double interest = double.parse(interestController.text) / 100 / 12;
     int totalPayments = time * 12;
 
@@ -57,7 +57,7 @@ class _LoanCalculatorState extends State<LoanCalculator> {
               decoration: const InputDecoration(labelText: 'Loan Amount'),
             ),
             TextField(
-              controller: termController,
+              controller: timeController,
               keyboardType: TextInputType.number,
               decoration:
                   const InputDecoration(labelText: 'Fixed Term (in years)'),
