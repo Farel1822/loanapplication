@@ -32,9 +32,9 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Center(
         child: Image.asset(
-          'src/calculator.png', // Pastikan gambar berada dalam folder 'assets' di proyek Flutter Anda
-          height: 200, // Sesuaikan tinggi gambar sesuai kebutuhan Anda
-          width: 200, // Sesuaikan lebar gambar sesuai kebutuhan Anda
+          'src/calculator.png', // gambar 
+          height: 200, 
+          width: 200, 
         ),
       ),
     );
