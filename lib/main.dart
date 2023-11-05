@@ -53,7 +53,7 @@ class _LoanCalculatorState extends State<LoanCalculator> {
           children: <Widget>[
             Image.asset(
               'src/calculator.png', //
-              height: 100, // Sesuaikan
+              height: 50, // Sesuaikan
             ),
             TextField(
               controller: loanAmountController,
@@ -71,14 +71,14 @@ class _LoanCalculatorState extends State<LoanCalculator> {
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(labelText: 'Interest Rate (%)'),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 4),
             ElevatedButton(
               onPressed: () {
                 calculateLoan();
               },
               child: const Text('Calculate'),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             Text(
               'Monthly Payment: \$${monthlyPayment.toStringAsFixed(2)}',
               style: const TextStyle(fontSize: 20),
