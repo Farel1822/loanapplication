@@ -14,7 +14,7 @@ void main() => runApp(MaterialApp(
     ));
 
 class LoanCalculator extends StatefulWidget {
-  const LoanCalculator({super.key});
+  const LoanCalculator({Key? key}) : super(key: key);
 
   @override
   _LoanCalculatorState createState() => _LoanCalculatorState();
@@ -25,19 +25,26 @@ class _LoanCalculatorState extends State<LoanCalculator> {
   TextEditingController timeController = TextEditingController();
   TextEditingController interestController = TextEditingController();
   double monthlyPayment = 0.0;
+  double yearPayment = 0.0;
+  double totalInterest = 0.0;
 
   void calculateLoan() {
     double p0 = double.parse(loanAmountController.text);
     int time = int.parse(timeController.text);
-    double interest = double.parse(interestController.text) / 100 / 12;
+    double interestRate = double.parse(interestController.text) / 100 / 12;
     int totalPayments = time * 12;
 
-    double atas = interest * pow(1 + interest, totalPayments.toDouble());
-    double bawah = pow(1 + interest, totalPayments.toDouble()) - 1;
+    double atas =
+        interestRate * pow(1 + interestRate, totalPayments.toDouble());
+    double bawah = pow(1 + interestRate, totalPayments.toDouble()) - 1;
     double result = p0 * (atas / bawah);
+    double totalPayment = result * totalPayments;
+    double interest = totalPayment - p0;
 
     setState(() {
       monthlyPayment = result;
+      yearPayment = totalPayment;
+      totalInterest = interest;
     });
   }
 
@@ -48,12 +55,12 @@ class _LoanCalculatorState extends State<LoanCalculator> {
         title: const Text('Loan Calculator'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(10.0),
         child: Column(
           children: <Widget>[
             Image.asset(
-              'src/calculator.png', //
-              height: 50, // Sesuaikan
+              'src/calculator.png',
+              height: 30,
             ),
             TextField(
               controller: loanAmountController,
@@ -71,7 +78,7 @@ class _LoanCalculatorState extends State<LoanCalculator> {
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(labelText: 'Interest Rate (%)'),
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: 1),
             ElevatedButton(
               onPressed: () {
                 calculateLoan();
@@ -81,6 +88,14 @@ class _LoanCalculatorState extends State<LoanCalculator> {
             const SizedBox(height: 10),
             Text(
               'Monthly Payment: \$${monthlyPayment.toStringAsFixed(2)}',
+              style: const TextStyle(fontSize: 20),
+            ),
+            Text(
+              'Year Payment: \$${yearPayment.toStringAsFixed(2)}',
+              style: const TextStyle(fontSize: 20),
+            ),
+            Text(
+              'Total Interest: \$${totalInterest.toStringAsFixed(2)}',
               style: const TextStyle(fontSize: 20),
             ),
           ],
