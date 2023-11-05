@@ -51,6 +51,10 @@ class _LoanCalculatorState extends State<LoanCalculator> {
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: <Widget>[
+            Image.asset(
+              'src/calculator.png', //
+              height: 100, // Sesuaikan
+            ),
             TextField(
               controller: loanAmountController,
               keyboardType: TextInputType.number,
